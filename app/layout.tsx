@@ -1,33 +1,17 @@
-import Link from "next/link";
 import { cache } from "react";
+import { fetchTime } from "./lib";
 
-export const fetchTime = cache(async function fetchTime() {
-    const date = new Date().getTime();
-    console.time(`[${date}] FETCH ["DATE_API_RESULT"]`);
-    const dateApiResult = await fetch(
-        "http://worldtimeapi.org/api/timezone/Europe/Paris",
-        {
-            cache: "force-cache",
-            next: {
-                tags: ["DATE_API_RESULT"],
-            },
-        }
-    ).then(
-        (r) =>
-            r.json() as Promise<{
-                unixtime: number;
-                utc_datetime: string;
-            }>
-    );
-    console.timeEnd(`[${date}] FETCH ["DATE_API_RESULT"]`);
-    return {
-        unixtime: dateApiResult.unixtime,
-        utc_datetime: dateApiResult.utc_datetime,
-    };
-});
-
-export default async function RootLayout({ children }) {
+export default async function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     const data = await fetchTime();
+
+    console.log({
+        "LAYOUT FETCH": data,
+    });
+
     return (
         <html lang="en">
             <head />

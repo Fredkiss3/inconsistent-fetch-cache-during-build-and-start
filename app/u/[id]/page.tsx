@@ -1,8 +1,12 @@
-import { fetchTime } from "../../layout";
+import { fetchTime } from "../../lib";
 
 /** Add your relevant code here for the issue to reproduce */
 export default async function Home({ params }: { params: { id: string } }) {
     const data = await fetchTime();
+
+    console.log({
+        [`PAGE /u/${params.id} FETCH`]: data,
+    });
 
     return (
         <>
