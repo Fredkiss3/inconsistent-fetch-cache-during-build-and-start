@@ -4,7 +4,7 @@ export const fetchTime = cache(async function fetchTime() {
     const date = new Date().getTime();
     console.time(`[${date}] FETCH ["DATE_API_RESULT"]`);
     const dateApiResult = await fetch(
-        "http://worldtimeapi.org/api/timezone/Europe/Paris",
+        "https://timeapi.fredkiss3.workers.dev/?timezone=Europe/Paris",
         {
             cache: "force-cache",
             next: {
@@ -20,7 +20,7 @@ export const fetchTime = cache(async function fetchTime() {
     );
     console.timeEnd(`[${date}] FETCH ["DATE_API_RESULT"]`);
     return {
-        unixtime: dateApiResult.unixtime,
-        utc_datetime: dateApiResult.utc_datetime,
+        time: dateApiResult.time,
+        timestamp: dateApiResult.timestamp,
     };
 });
