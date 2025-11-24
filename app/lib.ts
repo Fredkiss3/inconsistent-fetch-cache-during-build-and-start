@@ -14,8 +14,8 @@ export const fetchTime = cache(async function fetchTime() {
     ).then(
         (r) =>
             r.json() as Promise<{
-                unixtime: number;
-                utc_datetime: string;
+                time: number;
+                timestamp: string;
             }>
     );
     console.timeEnd(`[${date}] FETCH ["DATE_API_RESULT"]`);
